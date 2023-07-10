@@ -1,0 +1,22 @@
+package javaproject.testdb;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class MySQLDBTest {
+
+	public static void main(String[] args) {
+		// MySQL 6이상이면 TimeZone 추가 Asia/Seoul
+		String url = "jdbc:mysql://localhost:3306/testdb?useSSL=false";
+		String user = "root";
+		String password = "1234";
+		String sql = "INSERT INTO books (id,title,author,price,qty) values (?,?,?,?,?)";
+		
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con = DriverManager.getConnection(url,user,password);
+		PreparedStatement st = con.prepareStatment(sql);
+
+	}
+
+}

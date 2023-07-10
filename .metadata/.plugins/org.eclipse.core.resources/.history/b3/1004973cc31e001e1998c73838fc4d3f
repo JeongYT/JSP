@@ -1,0 +1,41 @@
+package javaproject.testdb;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class MySQLDBTest {
+
+	public static void main(String[] args) throws SQLException {
+		// MySQL 6이상이면 TimeZone 추가 Asia/Seoul
+		String url = "jdbc:mysql://localhost:3306/testdb?useSSL=false";
+		String user = "root";
+		String password = "1234";
+		String sql = "INSERT INTO books (id,title,author,price,qty) values (?,?,?,?,?)";
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection(url,user,password);
+			PreparedStatement st = con.prepareStatement(sql);
+			st.setInt(1, 1);
+			st.setString(2, "welcome");
+			st.setString(3, "kim");
+			st.setInt(4, 2000);
+			st.setInt(5, 1500);
+			
+			int result = st.executeUpdate();
+			
+			System.out.print(result);
+			st.close();
+			con.close();
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+	}
+
+}

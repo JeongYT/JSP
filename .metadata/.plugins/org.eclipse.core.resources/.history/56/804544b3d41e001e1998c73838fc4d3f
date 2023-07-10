@@ -1,0 +1,62 @@
+package javaproject.testdb;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class MySQLDBTest {
+
+	public static void main(String[] args) throws SQLException {
+		// MySQL 6이상이면 TimeZone 추가 Asia/Seoul
+		String url = "jdbc:mysql://localhost:3306/testdb?useSSL=false";
+		String user = "root";
+		String password = "1234";
+		// String sql = "INSERT INTO books (id,title,author,price,qty) values (?,?,?,?,?)";
+		// String sql = "SELECT * FROM books";
+		// String sql = "UPDATE books SET id=?, title=?, author=?, price=?, qty=? where ID=?";
+		String sql = "DELETE books where ID=?";
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection(url,user,password);
+			PreparedStatement st = con.prepareStatement(sql);
+			
+			st.setInt(1, 3);
+//			st.setString(2, "반지의제왕");
+//			st.setString(3, "안소니호킨스");
+//			st.setInt(4, 10000);
+//			st.setInt(5, 5000);
+//			st.setInt(6, 2);
+			
+			int result = st.executeUpdate();
+			System.out.println(result);
+			
+			// PreparedStatement st = con.prepareStatement(sql);
+			// Statement st = con.createStatement();
+			// ResultSet rs = st.executeQuery(sql);
+			
+//			while(rs.next()) {
+//				int id = rs.getInt("ID");
+//				String title = rs.getString("TITLE");
+//				String author = rs.getString("AUTHOR");
+//				String price = rs.getString("PRICE");
+//				String qty = rs.getString("QTY");
+//				
+//				System.out.println(id + " - " + title  + " : " + author + " : " + price + "원 : " + qty);
+//			}
+			
+			st.close();
+			con.close();
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+	}
+
+}

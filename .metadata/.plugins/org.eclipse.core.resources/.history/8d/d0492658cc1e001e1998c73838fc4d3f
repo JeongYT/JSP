@@ -1,0 +1,10 @@
+package javaproject.testdb;
+
+public class OracleDBTest {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
